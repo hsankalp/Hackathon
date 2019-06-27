@@ -21,7 +21,7 @@ class ApiSelector extends Component {
   render() {
     return (
       <div>
-        <h3>Select the APIs:</h3>
+        <h3>Select the Applications:</h3>
         {properties.applications.map(api => (
           <label key={api}>
             <input

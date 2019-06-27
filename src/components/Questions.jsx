@@ -29,8 +29,30 @@ class Questions extends Component {
     });
   };
 
-  test = () => {
-    console.log(this.state);
+  clickEvent = () => {
+    this.state.apis.forEach(api => this.publishApi(api));
+  };
+
+  publishApi = api => {
+    let body = JSON.stringify({
+      env: this.state.environment,
+      region: this.state.region,
+      app: api
+    });
+
+    fetch("http://localhost:8080/api/publish", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: body
+    })
+      .then(res => res.json())
+      .then(data =>
+        console.log("Request: " + body + " Response: " + data.status)
+      )
+      .catch(err => console.log(err));
   };
 
   render() {
@@ -45,7 +67,11 @@ class Questions extends Component {
         <div className="card">
           <ApiSelector setApis={this.setApis} />
         </div>
-        <button className="btn btn-success" onClick={this.test}>
+        <button
+          className="btn btn-success"
+          disabled={this.state.apis.size === 0}
+          onClick={this.clickEvent}
+        >
           Publish API
         </button>
       </div>
