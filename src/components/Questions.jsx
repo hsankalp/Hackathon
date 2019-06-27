@@ -8,20 +8,24 @@ class Questions extends Component {
   state = {
     environment: "QA",
     region: "North America",
-    apis: []
+    apis: new Set()
   };
 
   setEnv = env => {
-    console.log(env);
     this.setState({
       environment: env
     });
   };
 
   setRegion = region => {
-    console.log(region);
     this.setState({
       region: region
+    });
+  };
+
+  setApis = api => {
+    this.setState({
+      apis: api
     });
   };
 
@@ -37,7 +41,7 @@ class Questions extends Component {
           <RegionSelector setRegion={this.setRegion} />
         </div>
         <div className="card">
-          <ApiSelector />
+          <ApiSelector setApis={this.setApis} />
         </div>
         <button className="btn btn-success">Publish API</button>
       </div>

@@ -4,8 +4,18 @@ import { properties } from "../properties";
 class ApiSelector extends Component {
   state = {};
 
+  componentWillMount = () => {
+    this.apis = new Set();
+  };
+
   handleCheckboxChange = event => {
-    this.setState({});
+    let api = event.target.value;
+    if (this.apis.has(api)) {
+      this.apis.delete(api);
+    } else {
+      this.apis.add(api);
+    }
+    this.props.setApis(this.apis);
   };
 
   render() {
@@ -16,6 +26,7 @@ class ApiSelector extends Component {
           <label key={api}>
             <input
               type="checkbox"
+              value={api}
               checked={this.state.checked}
               onChange={this.handleCheckboxChange}
             />
