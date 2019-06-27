@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #2c333a;
 }
 
 code {
@@ -17,7 +18,10 @@ code {
   margin: 10px -5px 10px -5px;
   max-height: 350px;
   border-style: solid;
-  border-width: 1px;
+  border-width: 3px;
+  border-color: #44545f;
+  color: white;
+  background-color: #212529;
 }
 
 label {
@@ -26,4 +30,9 @@ label {
 
 .btn-success {
   float: right;
+}
+
+header {
+  color: #a7afb6;
+  text-align: center;
 }

@@ -26,12 +26,14 @@ class RegionSelector extends Component {
     return (
       <div>
         <h3>Select the Region:</h3>
-        <form onSubmit={this.handleSubmit}>
-          <select onChange={this.handleChange}>
-            {this.state.region.map(region => (
-              <option key={region.key}>{region.name}</option>
-            ))}
-          </select>
+        <form>
+          <div className="form-group col-2">
+            <select className="form-control" onChange={this.handleChange}>
+              {this.state.region.map(region => (
+                <option key={region.key}>{region.name}</option>
+              ))}
+            </select>
+          </div>
         </form>
       </div>
     );

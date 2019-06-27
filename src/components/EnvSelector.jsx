@@ -30,12 +30,14 @@ class EnvSelector extends Component {
     return (
       <div>
         <h3>Select the Environment:</h3>
-        <form onSubmit={this.handleSubmit}>
-          <select onChange={this.handleChange}>
-            {this.state.environments.map(env => (
-              <option key={env.key}>{env.name}</option>
-            ))}
-          </select>
+        <form>
+          <div className="form-group col-2">
+            <select className="form-control" onChange={this.handleChange}>
+              {this.state.environments.map(env => (
+                <option key={env.key}>{env.name}</option>
+              ))}
+            </select>
+          </div>
         </form>
       </div>
     );
