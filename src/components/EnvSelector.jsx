@@ -1,24 +1,39 @@
 import React, { Component } from "react";
-import { properties } from "../properties";
 
 class EnvSelector extends Component {
   state = {
-    env: ""
+    environments: [
+      {
+        name: "QA",
+        key: 0
+      },
+      {
+        name: "Perf",
+        key: 1
+      },
+      {
+        name: "Stage",
+        key: 2
+      },
+      {
+        name: "Prod",
+        key: 3
+      }
+    ]
   };
 
   handleChange = event => {
-    this.setState({ env: event.target.value });
-    console.log(event.target.value);
+    this.props.setEnv(event.target.value);
   };
 
   render() {
     return (
-      <div className="card">
+      <div>
         <h3>Select the Environment:</h3>
         <form onSubmit={this.handleSubmit}>
           <select onChange={this.handleChange}>
-            {properties.environments.map(env => (
-              <option key={env}>{env}</option>
+            {this.state.environments.map(env => (
+              <option key={env.key}>{env.name}</option>
             ))}
           </select>
         </form>
