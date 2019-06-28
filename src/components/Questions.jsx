@@ -121,7 +121,7 @@ class Questions extends Component {
                 <p key={response.application}>
                   {response.application} -> {response.status}
                   {response.status === "failure" ? (
-                    <p>Reason: {response.logs}</p>
+                    <p>Reason: {response.log}</p>
                   ) : null}
                 </p>
               ))}
