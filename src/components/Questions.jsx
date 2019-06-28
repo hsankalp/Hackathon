@@ -4,6 +4,8 @@ import EnvSelector from "./EnvSelector";
 import RegionSelector from "./RegionSelector";
 import ApiSelector from "./ApiSelector";
 
+import { properties } from "../properties";
+
 class Questions extends Component {
   state = {
     environment: "QA",
@@ -53,7 +55,7 @@ class Questions extends Component {
       app: api
     });
 
-    fetch("http://localhost:8080/api/publish", {
+    fetch(properties.baseUrl, {
       method: "POST",
       headers: {
         Accept: "application/json",

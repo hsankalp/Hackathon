@@ -1,5 +1,5 @@
 export const properties = {
-  baseUrl: "",
+  baseUrl: "http://localhost:8080/api/publish",
   region: [
     {
       name: "North America",
