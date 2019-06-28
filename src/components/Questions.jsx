@@ -74,7 +74,7 @@ class Questions extends Component {
   render() {
     return (
       <div className="row">
-        <div className="col-8">
+        <div className="col-6">
           <div className="card">
             <EnvSelector setEnv={this.setEnv} />
           </div>
@@ -92,7 +92,7 @@ class Questions extends Component {
             Publish API
           </button>
         </div>
-        <div className="col-4">
+        <div className="col-6">
           <div className="card">
             <h3>Review:</h3>
             <p>Environment: {this.state.environment}</p>
@@ -120,6 +120,9 @@ class Questions extends Component {
               {this.state.response.map(response => (
                 <p key={response.application}>
                   {response.application} -> {response.status}
+                  {response.status === "failure" ? (
+                    <p>Reason: {response.logs}</p>
+                  ) : null}
                 </p>
               ))}
             </div>

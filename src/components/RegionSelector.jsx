@@ -13,7 +13,7 @@ class RegionSelector extends Component {
       <div>
         <h3>Select the Region:</h3>
         <form>
-          <div className="form-group col-4">
+          <div className="form-group col-5">
             <select className="form-control" onChange={this.handleChange}>
               {properties.region.map(region => (
                 <option key={region.key}>{region.name}</option>
