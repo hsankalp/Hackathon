@@ -9,7 +9,7 @@ import { properties } from "../properties";
 class Questions extends Component {
   state = {
     environment: "QA",
-    region: "North America",
+    region: "US",
     applications: [],
     response: [],
     pending: false
@@ -54,6 +54,8 @@ class Questions extends Component {
       region: this.state.region,
       app: api
     });
+
+    console.log(body);
 
     fetch(properties.baseUrl, {
       method: "POST",
@@ -118,12 +120,12 @@ class Questions extends Component {
                 <h4>Response:</h4>
               )}
               {this.state.response.map(response => (
-                <p key={response.application}>
+                <div key={response.application}>
                   {response.application} -> {response.status}
                   {response.status === "failure" ? (
                     <p>Reason: {response.log}</p>
                   ) : null}
-                </p>
+                </div>
               ))}
             </div>
           )}

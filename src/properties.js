@@ -3,10 +3,12 @@ export const properties = {
   region: [
     {
       name: "North America",
+      value: "US",
       key: 0
     },
     {
       name: "China",
+      value: "CN",
       key: 1
     }
   ],
