@@ -121,7 +121,9 @@ class Questions extends Component {
               )}
               {this.state.response.map(response => (
                 <div key={response.application}>
-                  {response.application} -> {response.status}
+                  <p className={this.getColor(response.status)}>
+                    {response.application} -> {response.status}
+                  </p>
                   {response.status === "failure" ? (
                     <p>Reason: {response.log}</p>
                   ) : null}
@@ -133,6 +135,10 @@ class Questions extends Component {
       </div>
     );
   }
+
+  getColor = status => {
+    return status === "failure" ? "red" : "green";
+  };
 }
 
 export default Questions;
