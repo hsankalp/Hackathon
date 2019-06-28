@@ -88,7 +88,7 @@ class Questions extends Component {
             <ApiSelector setApis={this.setApis} />
           </div>
           <button
-            className="btn btn-success"
+            className="btn btn-primary"
             disabled={this.state.applications.length === 0}
             onClick={this.clickEvent}
           >
