@@ -1,18 +1,8 @@
 import React, { Component } from "react";
+import { properties } from "../properties";
 
 class RegionSelector extends Component {
-  state = {
-    region: [
-      {
-        name: "North America",
-        key: 0
-      },
-      {
-        name: "China",
-        key: 1
-      }
-    ]
-  };
+  state = {};
 
   handleChange = event => {
     this.props.setRegion(event.target.value);
@@ -23,9 +13,9 @@ class RegionSelector extends Component {
       <div>
         <h3>Select the Region:</h3>
         <form>
-          <div className="form-group col-2">
+          <div className="form-group col-4">
             <select className="form-control" onChange={this.handleChange}>
-              {this.state.region.map(region => (
+              {properties.region.map(region => (
                 <option key={region.key}>{region.name}</option>
               ))}
             </select>
