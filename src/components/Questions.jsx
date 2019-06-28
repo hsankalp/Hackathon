@@ -55,8 +55,6 @@ class Questions extends Component {
       app: api
     });
 
-    console.log(body);
-
     fetch(properties.baseUrl, {
       method: "POST",
       headers: {
@@ -68,7 +66,10 @@ class Questions extends Component {
       .then(res => res.json())
       .then(data => {
         this.responseAppStatus.push(data);
-        this.setState({ response: this.responseAppStatus, pending: false });
+        this.setState({ response: this.responseAppStatus });
+        if (this.state.response.length === this.state.applications.length) {
+          this.setState({ response: this.responseAppStatus, pending: false });
+        }
       })
       .catch(err => console.log(err));
   };
@@ -113,7 +114,7 @@ class Questions extends Component {
           {this.state.response.length === 0 &&
           this.state.pending === false ? null : (
             <div className="card">
-              {this.state.response.length === 0 &&
+              {this.state.response.length !== this.state.applications.length &&
               this.state.pending === true ? (
                 <h4 className="pending">Processing . . . </h4>
               ) : (
@@ -122,11 +123,11 @@ class Questions extends Component {
               {this.state.response.map(response => (
                 <div key={response.application}>
                   <p className={this.getColor(response.status)}>
-                    {response.application} -> {response.status}
+                    {response.application} <br />
+                    {response.status === "failure" ? (
+                      <span> => Reason: {response.log}</span>
+                    ) : null}
                   </p>
-                  {response.status === "failure" ? (
-                    <p>Reason: {response.log}</p>
-                  ) : null}
                 </div>
               ))}
             </div>
