@@ -37,3 +37,16 @@ header {
   color: #a7afb6;
   text-align: center;
 }
+
+.pending {
+  animation: alert 0.8s steps(10) infinite;
+}
+
+@keyframes alert {
+  from {
+    color: #00ccffb0;
+  }
+  to {
+    color: #002880;
+  }
+}
