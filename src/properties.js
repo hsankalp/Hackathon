@@ -1,5 +1,5 @@
 export const properties = {
-  baseUrl: "http://localhost:8080/api/publish",
+  baseUrl: "http://localhost:8080/api/v1/updateswagger",
   region: [
     {
       name: "North America",
