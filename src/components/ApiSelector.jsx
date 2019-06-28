@@ -30,7 +30,7 @@ class ApiSelector extends Component {
               checked={this.state.checked}
               onChange={this.handleCheckboxChange}
             />
-            <span>{api}</span>
+            <span> {api}</span>
           </label>
         ))}
       </div>

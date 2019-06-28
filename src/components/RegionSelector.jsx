@@ -10,10 +10,6 @@ class RegionSelector extends Component {
       {
         name: "China",
         key: 1
-      },
-      {
-        name: "All of them",
-        key: 3
       }
     ]
   };

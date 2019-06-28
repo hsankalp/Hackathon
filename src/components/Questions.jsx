@@ -8,7 +8,8 @@ class Questions extends Component {
   state = {
     environment: "QA",
     region: "North America",
-    apis: new Set()
+    applications: [],
+    response: []
   };
 
   setEnv = env => {
@@ -25,12 +26,16 @@ class Questions extends Component {
 
   setApis = api => {
     this.setState({
-      apis: api
+      applications: Array.from(api)
     });
   };
 
+  componentWillMount = () => {
+    this.responseAppStatus = [];
+  };
+
   clickEvent = () => {
-    this.state.apis.forEach(api => this.publishApi(api));
+    this.state.applications.map(api => this.publishApi(api));
   };
 
   publishApi = api => {
@@ -39,6 +44,8 @@ class Questions extends Component {
       region: this.state.region,
       app: api
     });
+
+    this.responseAppStatus = [];
 
     fetch("http://localhost:8080/api/publish", {
       method: "POST",
@@ -49,31 +56,61 @@ class Questions extends Component {
       body: body
     })
       .then(res => res.json())
-      .then(data =>
-        console.log("Request: " + body + " Response: " + data.status)
-      )
+      .then(data => {
+        this.responseAppStatus.push(data);
+        this.setState({ response: this.responseAppStatus });
+        console.log(this.state.response);
+      })
       .catch(err => console.log(err));
   };
 
   render() {
+    console.log(this.state.applications);
+
     return (
-      <div>
-        <div className="card">
-          <EnvSelector setEnv={this.setEnv} />
+      <div className="row">
+        <div className="col-8">
+          <div className="card">
+            <EnvSelector setEnv={this.setEnv} />
+          </div>
+          <div className="card">
+            <RegionSelector setRegion={this.setRegion} />
+          </div>
+          <div className="card">
+            <ApiSelector setApis={this.setApis} />
+          </div>
         </div>
-        <div className="card">
-          <RegionSelector setRegion={this.setRegion} />
+        <div className="col-4">
+          <div className="card">
+            <h3>Review:</h3>
+            <p>Environment: {this.state.environment}</p>
+            <p>Region: {this.state.region}</p>
+            <p>Applications:</p>
+            {this.state.applications.length === 0 ? (
+              <p>None Selected</p>
+            ) : (
+              <ol>
+                {this.state.applications.map(app => (
+                  <li>{app}</li>
+                ))}
+              </ol>
+            )}
+            <div>
+              {this.state.response.map(response => (
+                <p key={response.application}>
+                  {response.application} -> {response.status}
+                </p>
+              ))}
+            </div>
+            <button
+              className="btn btn-success"
+              disabled={this.state.applications.length === 0}
+              onClick={this.clickEvent}
+            >
+              Publish API
+            </button>
+          </div>
         </div>
-        <div className="card">
-          <ApiSelector setApis={this.setApis} />
-        </div>
-        <button
-          className="btn btn-success"
-          disabled={this.state.apis.size === 0}
-          onClick={this.clickEvent}
-        >
-          Publish API
-        </button>
       </div>
     );
   }
